@@ -3,7 +3,7 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 弘观-世界
+title: 弘观世界
 subtitle: 星辰之于日月，亦可争光
 description: 生当作人杰
 author: 蒲弘宇
@@ -79,5 +79,5 @@ theme: next
 
 deploy:
   type: git
-  repo: https://github.com/phyDream/phyDream.github.io.git
+  repo: git@github.com:phyDream/phyDream.github.io.git
   branch: master
