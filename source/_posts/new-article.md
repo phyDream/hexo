@@ -1,6 +1,6 @@
 
 ---
-title: 搭建属于你自己的博客
+title: 属于你自己的博客
 date: 2017-09-07 11:47:55
 tags: [blog,github,hexo]
 ---
@@ -200,7 +200,7 @@ $ hexo s
 
 ![image](http://ow0s809ce.bkt.clouddn.com/hexo_init7.png)
 
-使用上图标注的网址进行本地访问  ++http://localhost:4000/（注意：在git bash界面，不能用ctrl+C复制，只能右键copy）结果应该如下图，看到博客页面（界面样式和下图肯定不一样，下图主题修改过，不要在意）：
+使用上图标注的网址进行本地访问  http://localhost:4000/&emsp;（**注意：在git bash界面，不能用ctrl+C复制，只能右键copy**）结果应该如下图，看到博客页面（界面样式和下图肯定不一样，下图主题修改过，不要在意）：
 
 ![image](http://ow0s809ce.bkt.clouddn.com/hexo_init8.png)  
 
@@ -345,17 +345,134 @@ $ hexo deploy
 
 # 其他
 ## 域名绑定
+博客每次都要使用githubname.github.io这么一个长串的域名来访问显得太low了，这时我们可以考虑绑定我们自己的域名，这一点github是支持域名绑定的
+
+### 1.购买域名：
+>  **[参考网址](http://www.cnblogs.com/penglei-it/p/hexo_domain_name.html)**
+
+域名供应商有很多，首推阿里的万网，大公司可靠，相对于服务器昂贵的价格，域名一年也就几十元钱，选个可靠的更好，可以省去不必要的麻烦。个人建议选择:&emsp;.com 结尾的域名（大众化，贵不了多少，具体的看个人需求），购买后大概6个小时就能生效
+，尽快进行实名认证
+
+[万网链接](https://wanwang.aliyun.com/)
+
+### 2.设置域名解析：  
+
+![image](http://ow0s809ce.bkt.clouddn.com/%E5%9F%9F%E5%90%8D1.png)    
+
+点击添加解析，记录类型选A或CNAME，A记录的记录值就是ip地址，github(官方文档)提供了两个IP地址，192.30.252.153和192.30.252.154，这两个IP地址为github的服务器地址，两个都要填上，解析记录设置两个www和@，线路就默认就行了，CNAME记录值填你的github博客网址。如: username.github.io。  
+
+![image](http://ow0s809ce.bkt.clouddn.com/%E5%9F%9F%E5%90%8D2.png)
+
+![image](http://ow0s809ce.bkt.clouddn.com/%E5%9F%9F%E5%90%8D3.png)
+
+这些全部设置完成后，此时你并不能要申请的域名访问你的博客。接着你需要做的是在hexo根目录的source文件夹里创建CNAME文件，<span style="color:red">不带任何后缀</span>，里面添加你的域名信息，如：name.com。实践证明如果此时你填写的是www.name.com那么以后你只能用www.name.com访问，而如果你填写的是name.com。那么用www.name.com和name.com访问都是可以的。重新清理hexo,并发布即可用新的域名访问。  
+![image](http://ow0s809ce.bkt.clouddn.com/%E5%9F%9F%E5%90%8D4.png)  
+### 3.出现404：
+- 绑定了个人域名，但是域名解析错误。
+- 域名解析正确但你的域名是通过国内注册商注册的，你的域名因没有实名制而无法访问。
+- 你认为配置没有问题，那么可能只是你的浏览器在捣鬼，可尝试清除浏览器缓存再访问或者换个浏览器访问。
+- 也有可能是你的路由器缓存导致的错觉，所以也可以尝试换个局域网访问你的网站。
+- 最有可能的原因是你下载的hexo有问题，导致所有的东西都上传到了github,而导致index页面在主域名的下一级目录。你可以尝试查看上传的内容，找到index页面，在域名后面添加下一级目录。若能访问index页面（此时样式可能是乱的），则证明是hexo安装有问题，笔者当时遇到的就是这个问题。可卸载重新安装。
+> 注：1，2默认你的CNAME文件配置没有问题，如果没有绑定个人域名，则不需要CNAME文件。
+
 ## 主题修改
+### 如何更换主题
+[参考教程](http://www.jianshu.com/p/469e985288b3?from=jiantop.com)  
+
+主题下载：
+例子：next主题
+
+点到博客源文件右键打开git bash，把主题克隆到本地themes文件夹中
+```
+git clone https://github.com/iissnan/hexo-theme-next themes/next
+```
+![image](http://ow0s809ce.bkt.clouddn.com/themes1.png)
+
+![image](http://ow0s809ce.bkt.clouddn.com/themes2.png)
+
+配置文件_config.yml中把默认主题landscape修改为next
+
+![image](http://ow0s809ce.bkt.clouddn.com/themes3.png)
+
+然后就可以输入以下命令本地部署看一看效果了
+
+
+```
+hexo s
+```
+呈现效果应该如下：  
+
+![image](http://ow0s809ce.bkt.clouddn.com/themes4.png)
+
+
+### next基本配置
+
+next 是hexo中用户量比较大的一个主题，国内文档比较多，界面样式比较简洁
+
+[参考教程](http://theme-next.iissnan.com/getting-started.html)  
+
+进入next文件夹中打开主题配置文件_config.yml配置主题样式
+
+#### 选择 Scheme
+
+Scheme 是 NexT 提供的一种特性，借助于 Scheme，NexT 为你提供多种不同的外观。同时，几乎所有的配置都可以 在 Scheme 之间共用。目前 NexT 支持三种 Scheme，他们是：
+
+- Muse - 默认 Scheme，这是 NexT 最初的版本，黑白主调，大量留白
+- Mist - Muse 的紧凑版本，整洁有序的单栏外观
+- Pisces - 双栏 Scheme，小家碧玉似的清新
+
+Scheme 的切换通过更改 主题配置文件，搜索 scheme 关键字。 你会看到有三行 scheme 的配置，将你需用启用的 scheme 前面注释 # 去除即可。
+
+#### 设置语言
+站点配置文件， 将 language设置成你所需要的语言。建议明确设置你所需要的语言，例如选用简体中文：language: zh-Hans
+
+
+语言 | 代码
+---|---
+简体中文 | zh-Hans
+English	 | en
+日本語 |ja
+Korean	 | ko
+
+#### 设置菜单
+
+
+```
+menu:
+  home: 首页
+  archives: 归档
+  categories: 分类
+  tags: 标签
+  about: 关于
+  search: 搜索
+  commonweal: 公益404
+  something: 有料
+```
+
+
+
+### 其他主题
+[知乎推荐主题](http://note.youdao.com/)  
+
+[官网推荐主题](https://hexo.io/themes/)
+
 ## 文章发布
-## 界面修改
+
+hexo 支持的是markdown格式文件的文章，hexo文件夹里source文件夹里_post文件夹 就是用来存放博客文章的
 
 
----
+![image](http://ow0s809ce.bkt.clouddn.com/post1.png)    
+
+![image](http://ow0s809ce.bkt.clouddn.com/post2.png)   
+
+![image](http://ow0s809ce.bkt.clouddn.com/post3.png)
+
+其中 .md 文件就是你的博客文件，相当于Word生成的.doc文件，为了方便你博客排版。你可以利用各种markdown编辑器生成.md文件，并进行博客编写，然后复制到_post文件夹下，再调用git bash命令进行部署发布，最后就可以在你的博客上看到了文章了
+  
+  [极简MarkDown排版介绍](http://www.cnblogs.com/math/p/se-tools-001.html)
 
 
-# 附录
-## 图片的引用
-## markdown的使用
+
 
 
 
