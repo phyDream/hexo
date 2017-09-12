@@ -3,10 +3,11 @@
 title: 属于你自己的博客
 date: 2017-09-07 11:47:55
 tags: [blog,github,hexo]
+categories: [技术探索]
 ---
 ![image](http://ow0s809ce.bkt.clouddn.com/github_hexo.png)
-利用hexo在github上快速搭建个人博客  
 
+<center>利用hexo在github上快速搭建个人博客</center>
 <!-- more -->
 # 方案选型
 ## 主流的三种博客搭建方案：
@@ -55,11 +56,11 @@ tags: [blog,github,hexo]
 
 node.js安装成功验证：    
 
-> 1. 打开控制台：
+#### 1. 打开控制台：
 
 ![cmd](http://ow0s809ce.bkt.clouddn.com/node_check.png)  
 
-> 2. 验证node.js是否安装成功:  
+#### 2. 验证node.js是否安装成功:  
 ```
 node -v
 ```
@@ -67,7 +68,7 @@ node -v
 
 ![cmd](http://ow0s809ce.bkt.clouddn.com/node_check2.png)  
 
-> 3. 验证npm是否安装成功: 
+#### 3. 验证npm是否安装成功: 
 ```
 npm -v
 ```
@@ -94,10 +95,10 @@ npm -v
 
 - 安装成功验证： 
 
-> 1. 打开控制台：
+1. 打开控制台：
   
 ![cmd](http://ow0s809ce.bkt.clouddn.com/node_check.png)  
-> 2.验证git是否安装成功：
+2.验证git是否安装成功：
 
 ```
 git --version
@@ -467,12 +468,7 @@ hexo 支持的是markdown格式文件的文章，hexo文件夹里source文件夹
 
 ![image](http://ow0s809ce.bkt.clouddn.com/post3.png)
 
-其中 .md 文件就是你的博客文件，相当于Word生成的.doc文件，为了方便你博客排版。你可以利用各种markdown编辑器生成.md文件，并进行博客编写，然后复制到_post文件夹下，再调用git bash命令进行部署发布，最后就可以在你的博客上看到了文章了
-  
   [极简MarkDown排版介绍](http://www.cnblogs.com/math/p/se-tools-001.html)
 
-
-
-
-
-
+其中 .md 文件就是你的博客文件，相当于Word生成的.doc文件，为了方便你博客排版。你可以利用各种markdown编辑器生成.md文件，并进行博客编写，然后复制到_post文件夹下，再调用git bash命令进行部署发布，最后就可以在你的博客上看到了文章了
+  

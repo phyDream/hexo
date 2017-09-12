@@ -86,7 +86,7 @@ scheme: Gemini
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, globe icon will be loaded.
 social:
   GitHub: https://github.com/phyDream || GitHub
-  Weibo: https://weibo.com/2929952381/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1
+  微博: https://weibo.com/2929952381/profile?rightmod=1&wvr=6&mod=personinfo&is_all=1
   #E-Mail: mailto:yourname@gmail.com || envelope
   #Google: https://plus.google.com/yourname || google
   #Twitter: https://twitter.com/yourname || twitter
@@ -99,9 +99,11 @@ social:
 
 social_icons:
   enable: true
-  GitHub: github
-  Weibo: weibo
-  Twitter: twitter
+
+  微博: weibo
+  GitHub: stop
+  #Twitter: twitter
+
 # Blog rolls
 #links_title: Links
 #links_layout: block
@@ -189,8 +191,8 @@ post_meta:
 # Dependencies: https://github.com/willin/hexo-wordcount
 post_wordcount:
   item_text: true
-  wordcount: false
-  min2read: false
+  wordcount: true
+  min2read: true
   totalcount: false
   separated_meta: true
 
