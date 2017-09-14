@@ -5,7 +5,7 @@ date: 2017-9-12 11:39:01
 tags: [blog,Markdown,图床]
 categories: [技术探索]
 ---
-![image](http://note.youdao.com/yws/public/resource/75fb40ddd038dc6356e2af41618e5026/xmlnote/C7A6B61AE8794FF98413B0AD4EA89078/11705)  
+![image](http://ow0s809ce.bkt.clouddn.com/youdao.png)  
 
 <center>强烈推荐，[有道云笔记](http://note.youdao.com/semdl/markdown.html?vendor=unsilent14)的Markdown功能，实现多客户端同步编写，以及在线预览</center>
 
