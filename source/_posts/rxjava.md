@@ -1,10 +1,11 @@
 ---
-title: Markdown图床的选择
-date: 2017-9-12 11:39:01
+title: RxJava入门简介
+date: 2017-9-16 3:39:01
 tags: [Android,RxJava,安卓框架]
 categories: [技术探索]
 ---
-
+<center>让你的代码简洁起来，RxJava你值得拥有</center>
+<!-- more -->
 # 一、RxJava是什么？
 
 > "a library for composing asynchronous and event-based programs using observable sequences for the Java VM"
@@ -22,9 +23,6 @@ categories: [技术探索]
 RxJava把异步处理拆解为了**观察者**和**被观察者**两部分，两者之间通过**订阅**操作建立联系。
 
 
-https://www.daidingkang.cc/2017/05/19/Rxjava/
-http://www.jianshu.com/p/5e93c9101dc5
-
 # 二、怎样使用RxJava？
 
 ## 简单概念：
@@ -37,7 +35,8 @@ http://www.jianshu.com/p/5e93c9101dc5
 
 ### 1、被观察者：
 通过以下方式创建一个被观察者，被观察者往往就是代表着**数据获取**，把得到的数据作为参数放置于onNext（）方法中。
-```
+
+```java
 Observable<String> observable = Observable.create(new Observable.OnSubscribe<String>() {
 
            @Override
@@ -58,7 +57,7 @@ Observable<String> observable = Observable.create(new Observable.OnSubscribe<Str
 
 观察者就是从被观察者那里**得到数据**，并在回调方法onNext(String s)中执行**数据展示**，
 
-```
+```java
 Observer<String> observer = new Observer<String>() {
 
             @Override
@@ -85,7 +84,7 @@ Observer<String> observer = new Observer<String>() {
 ### 3、订阅操作
 observable和observer建立联系，要注意的是，订阅操作是 被观察者-**订阅**-观察者，即同一个数据源可以给多个观察者提供数据，类似于某些资讯类APP有目的性的给特定用户发送资讯推送
 
-```
+```java
 observable.subscribe(observer);
 ```
 
@@ -111,7 +110,7 @@ observable.subscribe(observer);
 
 1.使用create( ),最基本的创建方式（这种方法**需要手动调用onCompleted**，才会回调Observer的onCompleted方法）：
 
-```
+```java
 normalObservable = Observable.create(new Observable.OnSubscribe<String>() {
   @Override
   public void call(Subscriber<? super String> subscriber) {
@@ -124,7 +123,7 @@ normalObservable = Observable.create(new Observable.OnSubscribe<String>() {
 2.使用just( )，将为你创建一个Observable并自动为你调用onNext( )发射数据：
 
 
-```
+```java
 justObservable = Observable.just("just1","just2");//依次发送"just1"和"just2"
 ```
 
@@ -132,7 +131,7 @@ justObservable = Observable.just("just1","just2");//依次发送"just1"和"just2
 3.使用from( )，参数传入集合，该方法将会遍历集合，发送每个item，每次发送一个：
 
 
-```
+```java
 List<String> list = new ArrayList<>();
 list.add("from1");
 list.add("from2");
@@ -144,7 +143,7 @@ fromObservable = Observable.from(list);  //遍历list 每次发送一个
 
 4.使用defer( )，有观察者订阅时才创建Observable，并且为每个观察者创建一个新的Observable：
 
-```
+```java
 deferObservable = Observable.defer(new Func0<Observable<String>>() {
   @Override
   //注意此处的call方法没有Subscriber参数
@@ -156,32 +155,32 @@ deferObservable = Observable.defer(new Func0<Observable<String>>() {
 5.使用interval( ),创建一个按固定时间间隔发射整数序列的Observable，可用作**定时器**：
 
 
-```
+```java
 intervalObservable = Observable.interval(1, TimeUnit.SECONDS);//每隔一秒发送一次
 ```
 
 6.使用range( ),创建一个发射特定整数序列的Observable，第一个参数为起始值，第二个为发送的个数，如果为0则不发送，负数则抛异常：
 
 
-```
+```java
 rangeObservable = Observable.range(10, 5);//将发送整数10，11，12，13，14
 ```
 
 7.使用timer( ),创建一个Observable，它在一个给定的延迟后发射一个特殊的值，等同于Android中Handler的postDelay( )方法：
 
-```
+```java
 timeObservable = Observable.timer(3, TimeUnit.SECONDS);  //3秒后发射一个值
 ```
 
 8.使用repeat( ),创建一个重复发射特定数据的Observable:
 
 
-```
+```java
 repeatObservable = Observable.just("repeatObservable").repeat(3);//重复发射3次
 ```
 - Observer的创建
 
-```
+```java
 mObserver = new Observer<String>() {
   @Override
   public void onCompleted() {
@@ -199,7 +198,7 @@ mObserver = new Observer<String>() {
 如果你不在意数据是否接收完或者是否出现错误，即不需要Observer的onCompleted()和onError()方法，可使用Action1，subscribe()支持将Action1作为参数传入,RxJava将会调用它的call方法来接收数据，代码如下：
 
 
-```
+```java
 justObservable.subscribe(new Action1<String>() {
     @Override
     public void call(String s) {
@@ -215,7 +214,7 @@ justObservable.subscribe(new Action1<String>() {
  
  参考以下例子：
 
-```
+```java
 Observable.create(new Observable.OnSubscribe<List<User>>() {
           @Override
           public void call(Subscriber<? super List<User>> subscriber) {
@@ -260,10 +259,11 @@ subscribeOn()、observeOn()就是数据操作过程中的线程控制  - 设置�
 
  
 ##  RxJava常用操作符：
-###     Map：最常用且最实用的操作符之一，将对象转换成另一个对象发射出去，应用范围非常广，如数据的转换，数据的预处理等。
+###     Map：
+最常用且最实用的操作符之一，将对象转换成另一个对象发射出去，应用范围非常广，如数据的转换，数据的预处理等。
 例一：数据类型转换，改变最终的接收的数据类型。假设传入本地图片路径，根据路径获取图片的Bitmap。
 
-```
+```java
 Observable.just(filePath).map(new Func1<String, Bitmap>() {
   @Override
   public Bitmap call(String path) {
@@ -280,7 +280,7 @@ Observable.just(filePath).map(new Func1<String, Bitmap>() {
 例二：对数据进行预处理，最后得到理想型数据。实际开发过程中，从后台接口获取到的数据也许不符合我们想要的，这时候可以在获取过程中对得到的数据进行预处理（结合Retrofit）。
 
 
-```
+```java
 Observable.just("12345678").map(new Func1<String, String>() {
   @Override
   public String call(String s) {
@@ -298,7 +298,7 @@ FlatMap：和Map很像但又有所区别，Map只是转换发射的数据类型�
 为了更清晰一点，先贴一下School类：
 
 
-```
+```java
 public class School {
 
   private String name;
@@ -331,7 +331,7 @@ public class School {
 接着用Map打印学校名称：
 
 
-```
+```java
 List<School> schoolList = new ArrayList<>();
 Observable.from(schoolList).map(new Func1<School, String>() {
   @Override
@@ -347,7 +347,7 @@ Observable.from(schoolList).map(new Func1<School, String>() {
 再进一步，打印学校所有学生的姓名，先考虑用Map实现，将所有School对象直接转成Student：
 
 
-```
+```java
 Observable.from(schoolList).map(new Func1<School, School.Student>() {
   @Override
   public School.Student call(School school) {
@@ -363,7 +363,7 @@ Observable.from(schoolList).map(new Func1<School, School.Student>() {
 看似可行，但事实上，这是一段错误的代码，细心的人就会发现错误的地方
 
 
-```
+```java
 @Override
 public School.Student call(School school) {
   return school.getStudentList();  //错误，Student 是一个对象，返回的却是一个list
@@ -373,7 +373,7 @@ public School.Student call(School school) {
 所以用Map是无法实现直接打印学校的所有学生名字的，因为Map是一对一的关系，无法将单一的School对象转变成多个Student。前面说到，FlatMap可以改变原始Observable变成另外一个Observable，如果我们能利用from()操作符把school.getStudentList()变成另外一个Observable问题不就迎刃而解了吗，这时候就该FlatMap上场了，来看看它是怎么实现的：
 
 
-```
+```java
 Observable.from(schoolList).flatMap(new Func1<School, Observable<School.Student>>() {
   @Override
   public Observable<School.Student> call(School school) {
@@ -394,7 +394,7 @@ Map和FlatMap在我看来就像孪生兄弟一样，非常实用，实际开发�
 缓存，可以设置缓存大小，缓存满后，以list的方式将数据发送出去；例：
 
 
-```
+```java
 Observable.just(1,2,3).buffer(2).subscribe(new Action1<List<Integer>>() {
   @Override
   public void call(List<Integer> list) {
@@ -405,7 +405,7 @@ Observable.just(1,2,3).buffer(2).subscribe(new Action1<List<Integer>>() {
 运行打印结果如下：
 
 
-```
+```java
 11-02 20:49:58.370 23392-23392/? I/mytag: size:2
 11-02 20:49:58.370 23392-23392/? I/mytag: size:1
 ```
@@ -413,7 +413,7 @@ Observable.just(1,2,3).buffer(2).subscribe(new Action1<List<Integer>>() {
 在开发当中，个人经常将Buffer和Map一起使用，常发生在从后台取完数据，对一个List中的数据进行预处理后，再用Buffer缓存后一起发送，保证最后数据接收还是一个List，如下：
 
 
-```
+```java
 List<School> schoolList = new ArrayList<>();
 Observable.from(schoolList).map(new Func1<School, School>() {
   @Override
@@ -430,7 +430,7 @@ Observable.from(schoolList).map(new Func1<School, School>() {
 ### Take：
 发射前n项数据，还是用上面的例子，假设不要改所有学校的名称了，就改前四个学校的名称：
 
-```
+```java
 Observable.from(schoolList).take(4).map(new Func1<School, School>() {
   @Override
   public School call(School school) {
@@ -445,7 +445,7 @@ Observable.from(schoolList).take(4).map(new Func1<School, School>() {
 ### Distinct:
 去掉重复的项，比较好理解：
 
-```
+```java
 Observable.just(1, 2, 1, 1, 2, 3)
       .distinct()
       .subscribe(new Action1<Integer>() {
@@ -458,7 +458,7 @@ Observable.just(1, 2, 1, 1, 2, 3)
 
 输出
 
-```
+```java
 Next: 1
 Next: 2
 Next: 3
@@ -467,7 +467,7 @@ Next: 3
 ### Filter：
 过滤，通过谓词判断的项才会被发射，例如，发射小于4的数据：
 
-```
+```java
 Observable.just(1, 2, 3, 4, 5)
       .filter(new Func1<Integer, Boolean>() {
           @Override
@@ -483,7 +483,7 @@ Observable.just(1, 2, 3, 4, 5)
 
 输出：
 
-```
+```java
 Next: 1
 Next: 2
 Next: 3
@@ -513,7 +513,7 @@ RxJava 已经内置了几个 Scheduler ，它们已经适合大多数的使用�
 
 - **observeOn( )**: 指定 Subscriber 所运行在的线程。或者叫做事件消费的线程。经常设置为AndroidSchedulers.mainThread()用在得到数据后，数据界面展示更新UI。
 
-# 使用场景：
+# 四、使用场景：
 
 ## RxJava + Retrofit
 ## RxBinding
@@ -521,7 +521,7 @@ RxJava 已经内置了几个 Scheduler ，它们已经适合大多数的使用�
 ## RxBus
 ## RxPermission
  
-# 参考阅读：
+# 五、参考文章：
 
 [我所理解的RxJava——上手其实很简单（一）](http://www.jianshu.com/p/5e93c9101dc5)
 
