@@ -5,7 +5,9 @@ tags: [Android,RxJava,安卓框架]
 categories: [技术探索]
 ---
 <center>让你的代码简洁起来，RxJava你值得拥有</center>
+
 <!-- more -->
+
 # 一、RxJava是什么？
 
 > "a library for composing asynchronous and event-based programs using observable sequences for the Java VM"
@@ -532,6 +534,5 @@ RxJava 已经内置了几个 Scheduler ，它们已经适合大多数的使用�
 [给 Android 开发者的 RxJava 详解 - 扔物线](http://gank.io/post/560e15be2dca930e00da1083)
 
 [RxJava 与 Retrofit 结合的最佳实践 - tough1985](http://gank.io/post/56e80c2c677659311bed9841)
-
 
  
